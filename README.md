@@ -1,5 +1,9 @@
 # Wheelman Academy
 
+## Development
+
+Please see our [Development guide](docs/development.md) for how to get Wheelman
+set up for local development.
 
 ## License
 
