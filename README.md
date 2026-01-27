@@ -1,9 +1,12 @@
-# Wheelman Academy
+# Wheelman App
 
 ## Development
 
-Please see our [Development guide](docs/development.md) for how to get Wheelman
-set up for local development.
+อ่าน [Development guide](./docs/development.md) เพื่อดูว่ามีขั้นตอนของ Local development setup อย่างไรบ้าง เพื่อให้สามารถเริ่มต้นเข้ามาช่วยพัฒนา Wheelman app ได้
+
+## Documentation
+
+เอกสารต่าง ๆ ทั้งหมด และเรื่องราวต่าง ๆ จะอยู่ที่ [Documentation](./docs/)
 
 ## License
 
