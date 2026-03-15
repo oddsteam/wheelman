@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    Event.create(event_params) 
+    Event.create(event_params)
     redirect_to events_path
   end
 
