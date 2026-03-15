@@ -73,6 +73,20 @@
     <%= form.text_field :location_link, placeholder: "Link Google Map (Optional)", class: "border border-gray-300 rounded px-3 py-2" %>
   </div>
 
+  <div class="space-y-2">
+    <label class="block text-sm font-medium">Date Range</label>
+
+    <input
+      type="text"
+      id="date_range"
+      name="date_range"
+      class="w-full rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+      placeholder="Select date range"
+    >
+    <%= form.hidden_field :start_date, id: "start_date" %>
+    <%= form.hidden_field :end_date, id: "end_date" %>
+  </div>
+
   <div>
     <%= form.submit "Create Event", class: "bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg shadow" %>
   </div>
