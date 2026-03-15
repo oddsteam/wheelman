@@ -1,38 +1,45 @@
 <h1>Create Event</h1>
 
 <%= form_with model: @event do |form| %>
+  <div class="mb-4">
+    <%= form.label :photo, "Photo", class: "block mb-1 font-medium" %>
+
+    <%= form.file_field :photo,
+        accept: "image/jpeg,image/png,image/heic",
+        class: "border border-gray-300 rounded px-3 py-2 w-full" %>
+  </div>  
   <div>
     <%= form.label :name, "Event Name" %><br>
     <%= form.text_field :name, placeholder: "ลองแกล้งๆตั้งชื่อมาหน่อยจ้า", class: "border border-gray-300 rounded px-3 py-2" %>
   </div>
-<div class="mb-4">
-  <label class="block mb-2 font-medium">Activity Type</label>
+  <div class="mb-4">
+    <label class="block mb-2 font-medium">Activity Type</label>
 
-  <div class="flex gap-3">
+    <div class="flex gap-3">
 
-    <label class="cursor-pointer">
-      <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "swimming", nil %>
-      <span class="px-4 py-2 border border-gray-300 rounded-lg peer-checked:bg-blue-600 peer-checked:text-white">
-        Swimming
-      </span>
-    </label>
+      <label class="cursor-pointer">
+        <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "swimming", nil %>
+        <span class="px-4 py-2 border border-gray-300 rounded-lg peer-checked:bg-blue-600 peer-checked:text-white">
+          Swimming
+        </span>
+      </label>
 
-    <label class="cursor-pointer">
-      <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "running", nil %>
-      <span class="px-4 py-2 border border-gray-300 rounded-lg peer-checked:bg-blue-600 peer-checked:text-white">
-        Running
-      </span>
-    </label>
+      <label class="cursor-pointer">
+        <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "running", nil %>
+        <span class="px-4 py-2 border border-gray-300 rounded-lg peer-checked:bg-blue-600 peer-checked:text-white">
+          Running
+        </span>
+      </label>
 
-    <label class="cursor-pointer">
-      <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "cycling", nil %>
-      <span class="px-4 py-2 border border-gray-300 rounded-lg peer-checked:bg-blue-600 peer-checked:text-white">
-        Cycling
-      </span>
-    </label>
+      <label class="cursor-pointer">
+        <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "cycling", nil %>
+        <span class="px-4 py-2 border border-gray-300 rounded-lg peer-checked:bg-blue-600 peer-checked:text-white">
+          Cycling
+        </span>
+      </label>
 
+    </div>
   </div>
-</div>
   <div>
     <%= form.label :description, "Description" %><br>
     <%= form.text_field :description, placeholder: "ทำกิจกรรมอะไรกันบ้าง, กินข้าวหรือดริ๊งๆ", class: "border border-gray-300 rounded px-3 py-2" %>

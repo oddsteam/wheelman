@@ -15,6 +15,6 @@ class EventsController < ApplicationController
 
   def event_params
     puts params 
-    params.expect(event: [ :name, { activity_type: [] }, :description, :location_description, :location_link ])
+    params.expect(event: [ :photo, :name, { activity_type: [] }, :description, :location_description, :location_link ])
   end
 end
