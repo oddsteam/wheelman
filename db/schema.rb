@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_15_045130) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_15_080528) do
   create_table "events", force: :cascade do |t|
     t.json "activity_type"
+    t.string "category"
     t.datetime "created_at", null: false
     t.string "description"
     t.date "end_date"
@@ -20,7 +21,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_15_045130) do
     t.string "location_link"
     t.string "name"
     t.date "start_date"
-    t.string "type"
     t.datetime "updated_at", null: false
   end
 end
