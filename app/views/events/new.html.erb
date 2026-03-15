@@ -3,19 +3,20 @@
 <%= form_with model: @event do |form| %>
   <div>
     <%= form.label :name, "Event Name" %><br>
-    <%= form.text_field :name, class: "border border-gray-300 rounded px-3 py-2" %>
+    <%= form.text_field :name, placeholder: "ลองแกล้งๆตั้งชื่อมาหน่อยจ้า", class: "border border-gray-300 rounded px-3 py-2" %>
   </div>
   <div>
   <%= form.label :description, "Description" %><br>
-    <%= form.text_field :description, class: "border border-gray-300 rounded px-3 py-2" %>
+    <%= form.text_field :description, placeholder: "ทำกิจกรรมอะไรกันบ้าง, กินข้าวหรือดริ๊งๆ", class: "border border-gray-300 rounded px-3 py-2" %>
   </div>
     <div>
   <%= form.label :location, "Location" %><br>
-    <%= form.text_field :location_description, class: "border border-gray-300 rounded px-3 py-2" %><br>
-    <%= form.text_field :location_link, class: "border border-gray-300 rounded px-3 py-2" %>
+    <%= form.text_field :location_description, placeholder: "ไหนลองบอกที่ๆจะไปมาหน่อยสิ๊", class: "border border-gray-300 rounded px-3 py-2" %><br>
+    <%= form.text_field :location_link, placeholder: "Link Google Map (Optional)", class: "border border-gray-300 rounded px-3 py-2" %>
   </div>
 
   <div>
-    <%= form.submit "Create Event" %>
+    <%= form.submit "Create Event",
+  class: "bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg shadow" %>
   </div>
 <% end %>
