@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  activity_type: 
-  type: 
+  activity_type:
+  category:
   description: MyString
   location_description: MyString
   location_link: MyString
@@ -12,8 +12,8 @@ one:
 
 two:
   name: MyString
-  activity_type: 
-  type: 
+  activity_type:
+  category:
   description: MyString
   location_description: MyString
   location_link: MyString
