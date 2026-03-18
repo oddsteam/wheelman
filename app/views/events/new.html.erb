@@ -7,6 +7,9 @@
     <%= form.file_field :photo,
         accept: "image/jpeg,image/png,image/heic",
         class: "border border-gray-300 rounded px-3 py-2 w-full" %>
+    <% @event.errors.full_messages_for(:photo).each do |message| %>
+      <p class="mt-1 text-sm text-red-600"><%= message %></p>
+    <% end %>
   </div>  
   <div>
     <%= form.label :name, "Event Name" %><br>
