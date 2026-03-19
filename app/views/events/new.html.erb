@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gray-50 py-6 px-4">
+<div class="min-h-screen bg-gray-50 py-6 ">
   <div class="max-w-xl mx-auto">
 
     <!-- Header -->
@@ -31,23 +31,23 @@
 
           <label class="cursor-pointer">
             <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "swimming", nil %>
-            <span class="px-4 py-2 border border-gray-300 bg-white rounded-lg peer-checked:border-blue-400">
+            <div class="px-4 py-2 border border-gray-300 bg-white rounded-lg peer-checked:border-blue-400">
               🏊 Swimming
-            </span>
+            </div>
           </label>
 
           <label class="cursor-pointer">
             <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "running", nil %>
-            <span class="px-4 py-2 border border-gray-300 bg-white rounded-lg peer-checked:border-green-500">
+            <div class="px-4 py-2 border border-gray-300 bg-white rounded-lg peer-checked:border-green-500">
               🏃 Running
-            </span>
+            </div>
           </label>
 
           <label class="cursor-pointer">
             <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "cycling", nil %>
-            <span class="px-4 py-2 border border-gray-300 bg-white rounded-lg peer-checked:border-orange-400">
+            <div class="px-4 py-2 border border-gray-300 bg-white rounded-lg peer-checked:border-orange-400">
               🚴 Cycling
-            </span>
+            </div>
           </label>
         </div>
       </div>
