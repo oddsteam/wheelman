@@ -22,7 +22,7 @@
       </div>  
       <div>
         <%= form.label :name, "Event Name" %><br>
-        <%= form.text_field :name, placeholder: "ลองแกล้งๆตั้งชื่อมาหน่อยจ้า", class: "w-full p-3 rounded-xl bg-white focus:ring-2 focus:ring-green-400" %>
+        <%= form.text_field :name, placeholder: "ลองแกล้งๆตั้งชื่อมาหน่อยจ้า", class: "w-full p-3 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#95C24A]" %>
       </div>
       <div class="mb-4">
         <label class="block mb-2 font-medium">Activity Type</label>
@@ -31,21 +31,22 @@
 
           <label class="cursor-pointer">
             <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "swimming", nil %>
-            <div class="px-4 py-2 border border-gray-300 bg-white rounded-lg peer-checked:border-blue-400">
+            <div class="px-4 py-2 border border-gray-300 bg-white rounded-xl peer-checked:border-[#4AA2C2] peer-checked:ring-1 peer-checked:ring-[#4AA2C2]">
               🏊 Swimming
             </div>
           </label>
+          
 
           <label class="cursor-pointer">
             <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "running", nil %>
-            <div class="px-4 py-2 border border-gray-300 bg-white rounded-lg peer-checked:border-[#95C24A]">
+            <div class="px-4 py-2 border border-gray-300 bg-white rounded-xl peer-checked:border-[#95C24A] peer-checked:ring-1 peer-checked:ring-[#95C24A]">
               🏃 Running
             </div>
           </label>
 
           <label class="cursor-pointer">
             <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "cycling", nil %>
-            <div class="px-4 py-2 border border-gray-300 bg-white rounded-lg peer-checked:border-orange-400">
+            <div class="px-4 py-2 border border-gray-300 bg-white rounded-xl peer-checked:border-[#E76903] peer-checked:ring-1 peer-checked:ring-[#E76903]">
               🚴 Cycling
             </div>
           </label>
@@ -59,7 +60,7 @@
         <label class="cursor-pointer">
           <%= form.radio_button :category, "race", class: "hidden peer" %>
           <span class="px-4 py-2 border border-gray-300 rounded-lg bg-white
-                      peer-checked:border-[#95C24A]">
+                      peer-checked:border-[#95C24A] peer-checked:ring-1 peer-checked:ring-[#95C24A]">
             Race
           </span>
         </label>
@@ -67,7 +68,7 @@
         <label class="cursor-pointer">
           <%= form.radio_button :category, "camp", class: "hidden peer" %>
           <span class="px-4 py-2 border border-gray-300 rounded-lg bg-white
-                      peer-checked:border-[#95C24A]">
+                      peer-checked:border-[#95C24A] peer-checked:ring-1 peer-checked:ring-[#95C24A]">
             Camp
           </span>
         </label>
@@ -76,12 +77,12 @@
     </div>
       <div>
         <%= form.label :description, "Description" %><br>
-        <%= form.text_field :description, placeholder: "ทำกิจกรรมอะไรกันบ้าง, กินข้าวหรือดริ๊งๆ", class: "w-full p-3 rounded-xl bg-white focus:ring-2 focus:ring-green-400" %>
+        <%= form.text_field :description, placeholder: "ทำกิจกรรมอะไรกันบ้าง, กินข้าวหรือดริ๊งๆ", class: "w-full p-3 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#95C24A]" %>
       </div>
       <div>
         <%= form.label :location, "Location" %><br>
-        <%= form.text_field :location_description, placeholder: "ไหนลองบอกที่ๆจะไปมาหน่อยสิ๊", class: "w-full p-3 mb-2 rounded-xl bg-white focus:ring-2 focus:ring-green-400" %><br>
-        <%= form.text_field :location_link, placeholder: "Link Google Map (Optional)", class: "w-full p-3 rounded-xl bg-white focus:ring-2 focus:ring-green-400" %>
+        <%= form.text_field :location_description, placeholder: "ไหนลองบอกที่ๆจะไปมาหน่อยสิ๊", class: "w-full p-3 mb-2 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#95C24A]" %><br>
+        <%= form.text_field :location_link, placeholder: "Link Google Map (Optional)", class: "w-full p-3 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#95C24A]" %>
       </div>
 
       <div class="space-y-2">
@@ -91,7 +92,7 @@
           type="text"
           id="date_range"
           name="date_range"
-          class="w-full p-3 rounded-xl bg-white focus:ring-2 focus:ring-green-400"
+          class="w-full p-3 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#95C24A]"
           placeholder="Select date range"
         >
         <%= form.hidden_field :start_date, id: "start_date" %>
