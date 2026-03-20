@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gray-50 py-6 ">
+<div class="min-h-screen bg-gray-50 py-2 ">
   <div class="max-w-xl mx-auto">
 
     <!-- Header -->
@@ -9,7 +9,7 @@
       <h1 class="text-2xl font-bold mt-4">Create Event</h1>
     </div>
 
-    <%= form_with model: @event, class: "bg-gray-100 rounded-2xl shadow-sm p-5 md:p-6 space-y-5" do |form| %>
+    <%= form_with model: @event, class: "p-5 md:p-6 space-y-5" do |form| %>
 
      <div class="mb-4">
       <%= form.label :photo, "Photos (Optional)", class: "block mb-2 font-medium" %>
@@ -42,25 +42,38 @@
 
           <label class="cursor-pointer">
             <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "swimming", nil %>
-            <div class="px-4 py-2  bg-white rounded-xl peer-checked:border-[#4AA2C2] peer-checked:ring-1 peer-checked:ring-[#4AA2C2]">
-              🏊 Swimming
+            <div class="px-3 py-2 bg-white rounded-xl 
+              flex items-center gap-2
+              peer-checked:border-[#4AA2C2] 
+              peer-checked:ring-1 peer-checked:ring-[#4AA2C2]">
+             <span class="text-lg">🏊</span>
+             <span>Swimming</span>
             </div>
           </label>
           
 
           <label class="cursor-pointer">
             <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "running", nil %>
-            <div class="px-4 py-2 bg-white rounded-xl peer-checked:border-[#95C24A] peer-checked:ring-1 peer-checked:ring-[#95C24A]">
-              🏃 Running
+            <div class="px-4 py-2 bg-white rounded-xl
+            flex items-center gap-2
+            peer-checked:border-[#95C24A]
+            peer-checked:ring-1 peer-checked:ring-[#95C24A]">
+            <span class="text-lg">🏃</span>
+            <span>Running</span>
             </div>
           </label>
 
           <label class="cursor-pointer">
             <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "cycling", nil %>
-            <div class="px-4 py-2 bg-white rounded-xl peer-checked:border-[#E76903] peer-checked:ring-1 peer-checked:ring-[#E76903]">
-              🚴 Cycling
+            <div class="px-4 py-2 bg-white rounded-xl
+            flex items-center gap-2
+            peer-checked:border-[#E76903]
+            peer-checked:ring-1 peer-checked:ring-[#E76903]">
+             <span class="text-lg">🚴</span>
+             <span>Cycling</span>
             </div>
           </label>
+          
         </div>
       </div>
       <div class="mb-4">
