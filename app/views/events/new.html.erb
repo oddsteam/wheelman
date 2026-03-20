@@ -31,9 +31,15 @@
     <p class="mt-1 text-sm text-red-600"><%= message %></p>
   <% end %>
 </div>
-      <div>
-        <%= form.label :name, "Event Name" %><br>
-        <%= form.text_field :name, placeholder: "ลองแกล้งๆตั้งชื่อมาหน่อยจ้า", class: "w-full p-3 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#95C24A]" %>
+    <div>
+      <%= form.label :name, "Event Name" %><br>
+
+      <%= form.text_field :name, 
+        id: "event_name",
+        required: true, 
+        placeholder: "ลองแกล้งๆตั้งชื่อมาหน่อยจ้า", 
+        class: "w-full p-3 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#95C24A]" %>
+      <p id="name_error" class="text-red-500 text-sm mt-1"></p>
       </div>
       <div class="mb-4">
         <label class="block mb-2 font-medium">Activity Type</label>
@@ -101,13 +107,29 @@
     </div>
       <div>
         <%= form.label :description, "Description" %><br>
-        <%= form.text_field :description, placeholder: "ทำกิจกรรมอะไรกันบ้าง, กินข้าวหรือดริ๊งๆ", class: "w-full p-3 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#95C24A]" %>
+        <%= form.text_field :description,
+        id: "description",
+        required: true, 
+        placeholder: "ทำกิจกรรมอะไรกันบ้าง, กินข้าวหรือดริ๊งๆ", 
+        class: "w-full p-3 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#95C24A]" %>
+        <p id="description_error" class="text-red-500 text-sm mt-1"></p>
       </div>
       <div>
         <%= form.label :location, "Location" %><br>
-        <%= form.text_field :location_description, placeholder: "ไหนลองบอกที่ๆจะไปมาหน่อยสิ๊", class: "w-full p-3 mb-2 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#95C24A]" %><br>
-        <%= form.text_field :location_link, placeholder: "Link Google Map (Optional)", class: "w-full p-3 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#95C24A]" %>
-      </div>
+        <%= form.text_field :location_description, 
+        id: "location",
+        required: true,  
+        placeholder: "ไหนลองบอกที่ๆจะไปมาหน่อยสิ๊", 
+        class: "w-full p-3 mb-2 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#95C24A]" %><br>
+        <p id="location_error" class="text-red-500 text-sm mt-1"></p>
+
+        <%= form.text_field :location_link,
+        id: "location_link",
+        placeholder: "Link Google Map (Optional)", 
+        class: "w-full p-3 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#95C24A]" %>
+        <p id="location_link_error" class="text-red-500 text-sm mt-1"></p>
+
+        </div>
 
       <div class="space-y-2">
         <label class="block text-sm font-medium">Date Range</label>
@@ -119,13 +141,113 @@
           class="w-full p-3 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#95C24A]"
           placeholder="Select date range"
         >
-        <%= form.hidden_field :start_date, id: "start_date" %>
-        <%= form.hidden_field :end_date, id: "end_date" %>
+        <%= form.hidden_field :start_date, required: true, id: "start_date" %>
+        <%= form.hidden_field :end_date, required: true,id: "end_date" %>
       </div>
 
       <div>
-        <%= form.submit "Create Event", class: "w-full py-3 rounded-xl bg-gray-300 text-gray-700 font-medium hover:bg-gray-400 transition" %>
+      <%= form.submit "Create Event", id: "submit-btn", disabled: true, class: "w-full py-3 rounded-xl bg-gray-300 text-gray-500 font-medium cursor-not-allowed transition" %>
       </div>
     <% end %>
   </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.querySelector("form");
+  const submitBtn = document.getElementById("submit-btn");
+
+  const fields = [
+    { input: "event_name", error: "name_error", max: 200 },
+    { input: "description", error: "description_error", max: 500 },
+    { input: "location", error: "location_error", max: 200 }
+  ];
+
+  // validate length (reuse)
+  fields.forEach(({ input, error, max }) => {
+    const el = document.getElementById(input);
+    const err = document.getElementById(error);
+
+    el.addEventListener("input", () => {
+      if (el.value.length > max) {
+        err.textContent = "พิมพ์ยาวเกิ้นนน";
+      } else {
+        err.textContent = "";
+      }
+      toggleButton();
+    });
+  });
+
+  // location link (URL check)
+  const locationLinkInput = document.getElementById("location_link");
+  const locationLinkError = document.getElementById("location_link_error");
+
+  locationLinkInput.addEventListener("input", () => {
+    const value = locationLinkInput.value;
+
+    if (!value) {
+      locationLinkError.textContent = "";
+    } else {
+      try {
+        new URL(value);
+        locationLinkError.textContent = "";
+      } catch {
+        locationLinkError.textContent = "ต้องเป็น URL นะ";
+      }
+    }
+    toggleButton();
+  });
+
+  // activity check
+  function isActivityTypeValid() {
+    return document.querySelectorAll("input[name='event[activity_type][]']:checked").length > 0;
+  }
+
+  // date check
+  function isDateValid() {
+    const start = document.getElementById("start_date").value;
+    const end = document.getElementById("end_date").value;
+    return start && end && new Date(end) >= new Date(start);
+  }
+
+  // main toggle
+  function toggleButton() {
+    const isValid =
+      form.checkValidity() &&
+      isActivityTypeValid() &&
+      isDateValid();
+
+    submitBtn.disabled = !isValid;
+
+    submitBtn.classList.toggle("bg-gray-300", !isValid);
+    submitBtn.classList.toggle("text-gray-500", !isValid);
+    submitBtn.classList.toggle("cursor-not-allowed", !isValid);
+
+    submitBtn.classList.toggle("bg-[#95C24A]", isValid);
+    submitBtn.classList.toggle("text-white", isValid);
+    submitBtn.classList.toggle("hover:bg-green-600", isValid);
+  }
+
+  // bind form events
+  form.addEventListener("input", toggleButton);
+  form.addEventListener("change", toggleButton);
+
+  // date range
+  const dateRangeInput = document.getElementById("date_range");
+  const startDateInput = document.getElementById("start_date");
+  const endDateInput = document.getElementById("end_date");
+
+  dateRangeInput.addEventListener("input", (e) => {
+    const value = e.target.value;
+    if (!value.includes("to")) return;
+
+    const [start, end] = value.split(" to ");
+    startDateInput.value = start;
+    endDateInput.value = end;
+
+    toggleButton();
+  });
+
+  toggleButton();
+});
+</script>
