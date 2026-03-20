@@ -36,7 +36,7 @@ class Event < ApplicationRecord
 
     def photo_size_within_limit
         return unless photo.attached?
-        return if photo.blob.byte_size < 20.megabytes
+        return if photo.blob.byte_size <= 20.megabytes
         errors.add(:photo, "must be smaller than 20MB")
     end
 
