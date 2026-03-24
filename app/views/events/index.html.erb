@@ -1,4 +1,9 @@
-<h1 class="text-3xl font-semibold text-gray-900 mb-4">Events</h1>
+<div class="mb-4 flex items-center justify-between">
+  <h1 class="text-3xl font-semibold text-gray-900">Events</h1>
+
+  <%= link_to "สร้าง Event", events_new_path,
+    class: "rounded-xl bg-[#95C24A] px-4 py-2 text-white shadow-sm hover:opacity-90" %>
+</div>
 
 <% if @events_by_category.any? %>
   <% @events_by_category.each do |category, events| %>
