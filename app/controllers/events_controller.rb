@@ -1,5 +1,8 @@
 class EventsController < ApplicationController
   def index
+    @events = Event.order(start_date: :asc)
+    @events_by_category = @events.group_by(&:category)
+
   end
 
   def new
