@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get "events", to: "events#index"
   get "events/new"
+  get "events/me"
+  get "events/:id", to: "events#detail", as: :event
   post "events", to: "events#create"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

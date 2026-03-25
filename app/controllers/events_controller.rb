@@ -5,6 +5,10 @@ class EventsController < ApplicationController
 
   end
 
+  def me
+    @events = Event.order(start_date: :asc)
+  end
+
   def new
     @event = Event.new
   end
