@@ -21,8 +21,12 @@ class EventsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
+ end
 
+  def detail
+    @event = Event.find(params[:id])
+  end
+  
   private
 
   def event_params
