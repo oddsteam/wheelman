@@ -12,7 +12,7 @@
     <h1 class="text-2xl font-bold text-gray-800 mb-2">MY EVENT</h1>
 
     <!-- Event Cards -->
-    <div class="space-y-4">
+    <div class="space-y-4 mb-4">
       <% @events.each do |event| %>
         <div class="bg-white rounded-xl p-5 shadow-sm">
           
@@ -29,15 +29,15 @@
           </p>
 
           <!-- Actions -->
-          <div class="flex items-center gap-3">
+          <div class="flex gap-3">
             <%= link_to "Detail", event_path(event),
-                class: "flex-1 text-center bg-[#95C24A] text-white py-3 rounded-xl font-medium hover:bg-green-600 transition" %>
+      class: "flex-1 block text-center bg-[#95C24A] text-white py-3 rounded-xl font-medium" %>
 
           <!-- Delete Icon -->
           <%= link_to event_path(event),
                 method: :delete,
                 data: { confirm: "Are you sure?" },
-                class: "w-12 h-12 items-center justify-center flex p-3 border rounded-xl" do %>
+                class: "w-12 h-12 items-center justify-center flex p-3 rounded-xl" do %>
               🗑️
             <% end %>
 
