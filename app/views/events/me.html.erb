@@ -1,7 +1,7 @@
 <div class="min-h-screen bg-gray-50 py-4">
   <!-- Back Button -->
   <div class="max-w-md mx-auto px-4 mb-4">
-    <%= link_to events_path, class: "inline-flex items-center px-4 py-2 border border-[#95C24A] rounded-xl text-sm font-medium bg-white shadow-md" do %>
+    <%= link_to events_path, class: "inline-flex items-center px-4 py-2 border border-[#95C24A] rounded-xl text-sm font-medium bg-white" do %>
       ← All Event
     <% end %>
   </div>
@@ -22,8 +22,8 @@
           </h2>
 
           <!-- Date -->
-          <p class="text-gray-400 text-sm">Date</p>
-          <p class="text-gray-800 font-medium mb-3">
+          <p class="text-gray-400 text-[14px] font-normal">Date</p>
+          <p class="text-gray-800 text-[16px] font-normal mb-3">
             <%= event.start_date %> -
             <%= event.end_date %>
           </p>
@@ -31,7 +31,7 @@
           <!-- Actions -->
           <div class="flex items-center gap-3">
             <%= link_to "Detail", event_path(event),
-            class: "flex-1 flex items-center text-center text-gray-800 justify-center bg-[#95C24A] py-2 rounded-xl font-medium w-full" %>
+            class: "flex-1 flex items-center text-center text-gray-800 justify-center bg-[#95C24A] py-2 rounded-xl text-[14px] font-bold w-full h-[40px]" %>
 
           <!-- Delete Icon -->
           <%= link_to event_path(event),
