@@ -31,13 +31,13 @@
           <!-- Actions -->
           <div class="flex gap-3">
             <%= link_to "Detail", event_path(event),
-      class: "flex-1 block text-center bg-[#95C24A] text-white py-3 rounded-xl font-medium" %>
+            class: "flex-1 flex items-center text-center justify-center bg-[#95C24A] text-white py-3 rounded-xl font-medium w-full" %>
 
           <!-- Delete Icon -->
           <%= link_to event_path(event),
                 method: :delete,
                 data: { confirm: "Are you sure?" },
-                class: "w-12 h-12 items-center justify-center flex p-3 rounded-xl" do %>
+                class: "w-12 h-12 items-center justify-center flex rounded-xl" do %>
               🗑️
             <% end %>
 
