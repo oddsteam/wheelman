@@ -24,8 +24,7 @@
           <!-- Date -->
           <p class="text-gray-400 text-[14px] font-normal">Date</p>
           <p class="text-gray-800 text-[16px] font-normal mb-3">
-            <%= event.start_date %> -
-            <%= event.end_date %>
+            <%= "#{event.start_date.strftime('%d %b %Y')} - #{event.end_date.strftime('%d %b %Y')}" %>
           </p>
 
           <!-- Actions -->
