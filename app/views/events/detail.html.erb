@@ -16,7 +16,7 @@
       <!-- Date -->
       <p class="text-gray-400 text-sm">Date</p>
       <p class="text-gray-700 font-medium mb-4">
-        <%= @event.start_date %> - <%= @event.end_date %>
+        <%= format_date_range(@event.start_date, @event.end_date) %>
       </p>
 
       <!-- Description -->
