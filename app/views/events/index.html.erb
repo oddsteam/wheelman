@@ -4,7 +4,18 @@
   <%= link_to "สร้าง Event", events_new_path,
     class: "rounded-xl bg-[#95C24A] px-4 py-2 text-white shadow-sm hover:opacity-90" %>
 </div>
-
+<div class="mb-4 flex items-center gap-3 text-sm">
+  <div class="flex items-center gap-2">
+    <span class="inline-flex h-[25px] w-[67px] items-center justify-center rounded-[8px] bg-[#95C24A] px-3 py-1 text-white">
+      Race
+    </span>
+  </div>
+  <div class="flex items-center gap-2">
+    <span class="inline-flex h-[25px] w-[67px] items-center justify-center rounded-[8px] bg-[#EC8735] px-3 py-1 text-white">
+      Camp
+    </span>
+  </div>
+</div>
 <% if @events_by_category.any? %>
   <% @events_by_category.each do |category, events| %>
     <div class="mb-6">
