@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>LINE Login</title>
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+<div id="status">Loading…</div>
+ 
+    <script>
+      (async () => {
+        const status = document.getElementById("status");
+ 
+        await liff.init({ liffId: "<%= ENV['LINE_LIFF_ID'] %>"});
+ 
+        if (!liff.isLoggedIn()) {
+          liff.login();
+          return;
+        }
+ 
+        const idToken = liff.getIDToken();
+        if (!idToken) {
+          status.textContent = "No id_token available from LIFF.";
+          return;
+        }
+ 
+        status.textContent = "Signing you in…";
+ 
+        const res = await fetch("/auth/line_liff", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')?.content
+          },
+          credentials: "same-origin",
+          body: JSON.stringify({ id_token: idToken })
+        });
+ 
+        if (!res.ok) {
+          status.textContent = "Login failed.";
+          return;
+        }
+ 
+        window.location.href = "/events";
+      })();
+</script>
+</body>
+</html>
