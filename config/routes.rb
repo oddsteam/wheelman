@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "home#home"
-  get  "login", to: "login#login"  
-  post "/auth/line_liff",to: "sessions#line_liff"
+  get  "login", to: "login#login"
+  post '/auth/line_liff', to: 'auth#line_liff'
   get "events", to: "events#index"
   get "events/new"
   get "events/me"

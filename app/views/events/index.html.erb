@@ -1,10 +1,19 @@
-<div class="mb-4 flex items-center justify-between">
+<% if @user %>
+  <div class="flex justify-between items-center gap-2 px-4 fixed h-12 top-0 right-0 left-0 bg-white z-1 border-b-1 border-[#E0E1E0]"">
+      <div class="flex items-center gap-3">
+        <img class="h-6 w-6 rounded-2xl" src="<%= @user.picture_url %>" />
+        <p class="text-[#2E2E2D]"><%= @user.display_name %></p>
+      </div>
+      <div></div>
+  </div>
+<% end %>
+
+<div class="mb-4 flex items-center justify-between mt-12">
   <h1 class="text-3xl font-semibold text-gray-900">Events</h1>
 
   <%= link_to "สร้าง Event", events_new_path,
     class: "rounded-xl bg-[#95C24A] px-4 py-2 text-white shadow-sm hover:opacity-90" %>
 
-  <button onclick="logout()">Logout LINE</button>
 </div>
 <div class="mb-4 flex items-center gap-3 text-sm">
   <div class="flex items-center gap-2">
@@ -38,16 +47,3 @@
 <% else %>
   <p>ยังไม่มี event</p>
 <% end %>
-
-<script>
-async function main() {
-  await liff.init({ liffId: "<%= ENV['LINE_LIFF_ID'] %>" });
-}
-
-function logout() {
-  liff.logout();
-  window.location.href = "/login";
-}
-
-main();
-</script>

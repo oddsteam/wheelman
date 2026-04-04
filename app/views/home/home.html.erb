@@ -1,14 +1,13 @@
-<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 <script>
-async function init() {
-  await liff.init({ liffId: "<%= ENV['LINE_LIFF_ID'] %>" });
+  init();
 
-  if (liff.isLoggedIn()) {
-    window.location.href = "/events";
-  } else {
-    window.location.href = "/login";
+  async function init() {
+    await liff.init({ liffId: "<%= ENV['LINE_LIFF_ID'] %>" });
+
+    if (liff.isLoggedIn()) {
+      window.location.href = "/events";
+    } else {
+      window.location.href = "/login";
+    }
   }
-}
-
-init();
 </script>

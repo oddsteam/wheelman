@@ -1,8 +1,9 @@
 class EventsController < ApplicationController
   def index
+    @user = User.find_by(line_user_id: session[:user_id])
+
     @events = Event.order(start_date: :asc)
     @events_by_category = @events.group_by(&:category)
-
   end
 
   def me
