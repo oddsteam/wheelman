@@ -49,13 +49,13 @@
 
       <!-- Description -->
       <p class="text-[#989A96] text-[14px] font-light px-[4px]">Description</p>
-      <p class="text-[#2E2E2D] text-[14px] font-normal mb-2 px-[4px]">
+      <p class="text-[#2E2E2D] text-[14px] font-normal mb-2 px-[4px] break-words">
         <%= @event.description %>
       </p>
 
       <!-- Location -->
       <p class="text-[#989A96] text-[14px] font-light px-[4px]">Location</p>
-      <p class="text-gray-700 px-[4px]">
+      <p class="text-[#2E2E2D] text-[14px] font-normal px-[4px] ">
         <%= @event.location_description %>
       </p>
       <div class="px-[4px] mb-2">
@@ -69,7 +69,7 @@
 
       <!-- Date -->
       <p class="text-[#989A96] text-[14px] font-light px-[4px]">Date</p>
-      <p class="text-gray-700 font-medium mb-4 px-[4px]">
+      <p class="text-[#2E2E2D] text-[14px] font-normal mb-4 px-[4px]">
         <%= format_date_range(@event.start_date, @event.end_date) %>
       </p>
 
