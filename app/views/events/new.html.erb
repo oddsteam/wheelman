@@ -15,18 +15,22 @@
      <div class="mb-4">
       <%= form.label :photo, "Photos (Optional)", class: "block mb-2 font-medium" %>
 
-       <label class="flex items-center justify-center w-20 h-16 rounded-2xl border-gray-300 bg-white hover:border-[#95C24A] transition">
+  <label class="flex items-center justify-center w-20 h-16 rounded-2xl bg-white hover:border-[#95C24A] transition cursor-pointer overflow-hidden">
     
-      <!-- icon -->
-       <div class="text-[#95C24A] text-2xl"> 
-       <%= image_tag "Add photo.png", width: 20, height: 20 %>
-         </div>
+    <!-- icon (ตอนยังไม่เลือกรูป) -->
+    <div id="photo-placeholder" class="text-[#95C24A] text-2xl">
+      <%= image_tag "Add photo.png", width: 20, height: 20 %>
+    </div>
 
-        <!-- input จริง (ซ่อน) -->
-        <%= form.file_field :photo,
-        accept: "image/jpeg,image/png,image/heic",
-        class: "hidden" %>
-    </label>
+    <!-- preview -->
+    <img id="photo-preview" class="hidden w-full h-full object-cover" />
+
+    <!-- input จริง (ซ่อน) -->
+    <%= form.file_field :photo,
+      id: "photo-input",
+      accept: "image/jpeg,image/png,image/heic",
+      class: "hidden" %>
+  </label>
 
   <% @event.errors.full_messages_for(:photo).each do |message| %>
     <p class="mt-1 text-sm text-red-600"><%= message %></p>
@@ -252,4 +256,27 @@ document.addEventListener("turbo:load", function () {
 
   toggleButton();
 });
+
+  document.addEventListener("turbo:load", () => {
+    const input = document.getElementById("photo-input");
+    const preview = document.getElementById("photo-preview");
+    const placeholder = document.getElementById("photo-placeholder");
+
+    if (!input) return;
+
+    input.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+
+      reader.onload = function(event) {
+        preview.src = event.target.result;
+        preview.classList.remove("hidden");
+        placeholder.classList.add("hidden");
+      };
+
+      reader.readAsDataURL(file);
+    });
+  });
 </script>
