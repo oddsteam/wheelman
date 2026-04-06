@@ -2,41 +2,82 @@
   <div class="max-w-xl mx-auto">
 
     <!-- Back -->
-    <%= link_to "← Back", events_path,
-      class: "inline-block mb-4 text-green-600" %>
+    <div class="max-w-md mx-auto mb-4">
+    <%= link_to events_path, class: "inline-flex items-center px-4 py-2 border border-[#95C24A] rounded-xl text-sm font-medium bg-white" do %>
+      ← All Event
+    <% end %>
+    </div>
 
     <!-- Card -->
-    <div class="bg-white rounded-2xl shadow p-6">
+    <div class="bg-white rounded-2xl shadow p-[8px]">
+
+      <!-- Photo -->
+      <%= image_tag(
+        @event.photo.attached? ? url_for(@event.photo) : "Default-Event.png",
+        class: "w-full h-64 object-cover rounded-lg mb-2"
+      ) %>
 
       <!-- Title -->
-      <h1 class="text-2xl font-semibold text-gray-800 mb-4">
+      <h1 class="text-[20px] font-normal text-[#2E2E2D] px-[4px] mb-2">
         <%= @event.name %>
       </h1>
 
-      <!-- Date -->
-      <p class="text-gray-400 text-sm">Date</p>
-      <p class="text-gray-700 font-medium mb-4">
-        <%= format_date_range(@event.start_date, @event.end_date) %>
-      </p>
+      <!-- Activity -->
+      <%
+      activity_map = {
+        "swimming" => { label: "Swimming", icon: "Swim.png" },
+        "running"  => { label: "Running",  icon: "Run.png" },
+        "cycling"  => { label: "Cycling",  icon: "Bike.png" }
+      }
+      %>
+
+      <% if @event.activity_type.present? %>
+        <div class="flex flex-wrap gap-3 mb-2 px-[4px]">
+          <% @event.activity_type.each do |type| %>
+            <% item = activity_map[type] %>
+            <% next unless item %>
+
+            <div class="pr-4 py-2 bg-white rounded-xl flex items-center gap-2">
+              <%= image_tag item[:icon], width: 20, height: 20 %>
+              <span class="text-[12px] font-light text-[#2E2E2D]">
+                <%= item[:label] %>
+              </span>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
 
       <!-- Description -->
-      <p class="text-gray-400 text-sm">Description</p>
-      <p class="text-gray-700 mb-4">
+      <p class="text-[#989A96] text-[14px] font-light px-[4px]">Description</p>
+      <p class="text-[#2E2E2D] text-[14px] font-normal mb-2 px-[4px]">
         <%= @event.description %>
       </p>
 
       <!-- Location -->
-      <p class="text-gray-400 text-sm">Location</p>
-      <p class="text-gray-700 mb-2">
+      <p class="text-[#989A96] text-[14px] font-light px-[4px]">Location</p>
+      <p class="text-gray-700 px-[4px]">
         <%= @event.location_description %>
       </p>
-
-      <% if @event.location_link.present? %>
-        <%= link_to "Open Map", @event.location_link,
-          target: "_blank",
-          class: "text-green-600 underline" %>
+      <div class="px-[4px] mb-2">
+      <% if @event.location_link.present?%>
+        <%= link_to @event.location_link,
+        @event.location_link,
+        target: "_blank",
+        class: "underline" %>
       <% end %>
+      </div>
 
+      <!-- Date -->
+      <p class="text-[#989A96] text-[14px] font-light px-[4px]">Date</p>
+      <p class="text-gray-700 font-medium mb-4 px-[4px]">
+        <%= format_date_range(@event.start_date, @event.end_date) %>
+      </p>
+
+      <div>
+        <button class="w-full py-3 rounded-xl bg-[#95C24A] hover:bg-[#7ea63d] text-white font-medium">
+          Confirm & Join!
+        </button>
+      </div>
     </div>
   </div>
 </div>
