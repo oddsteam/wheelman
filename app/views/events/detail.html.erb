@@ -13,8 +13,8 @@
 
       <!-- Photo -->
       <%= image_tag(
-        @event.photo.attached? ? url_for(@event.photo) : "Default-Event.png",
-        class: "w-full h-64 object-cover rounded-lg mb-2"
+        @event.photo.attached? ? url_for(@event.photo) : "Default-Event.svg",
+        class: "w-full max-h-48 object-fill rounded-lg mb-2"
       ) %>
 
       <!-- Title -->
