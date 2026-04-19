@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   mount_avo
   root "home#home"
   get  "login", to: "login#login"
-  post '/auth/line_liff', to: 'auth#line_liff'
+  post "/auth/line_liff", to: "auth#line_liff"
   get "events", to: "events#index"
   get "events/new"
   get "events/me"
@@ -21,4 +21,3 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 end
-

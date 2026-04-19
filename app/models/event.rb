@@ -21,7 +21,7 @@ class Event < ApplicationRecord
     # link_location (optional + ต้องเป็น URL)
     validates :location_link,
             format: {
-              with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
+              with: URI::DEFAULT_PARSER.make_regexp(%w[http https])
             },
             allow_blank: true
 

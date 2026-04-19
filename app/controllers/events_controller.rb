@@ -27,7 +27,7 @@ class EventsController < ApplicationController
   def detail
     @event = Event.find(params[:id])
   end
-  
+
   private
 
   def event_params

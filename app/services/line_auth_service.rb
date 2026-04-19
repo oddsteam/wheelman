@@ -1,6 +1,6 @@
-require 'net/http'
-require 'uri'
-require 'json'
+require "net/http"
+require "uri"
+require "json"
 
 class LineAuthService
   VERIFY_URL = "https://api.line.me/oauth2/v2.1/verify"
@@ -10,7 +10,7 @@ class LineAuthService
 
     res = Net::HTTP.post_form(uri, {
       id_token: id_token,
-      client_id: ENV['LINE_CHANNEL_ID']
+      client_id: ENV["LINE_CHANNEL_ID"]
     })
 
     body = JSON.parse(res.body)

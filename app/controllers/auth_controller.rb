@@ -1,7 +1,7 @@
-class AuthController < ApplicationController 
+class AuthController < ApplicationController
   def line_liff
     id_token = params[:id_token]
- 
+
     return render json: { error: "missing token" }, status: 401 if id_token.blank?
 
     begin
