@@ -7,5 +7,9 @@ class Avo::Resources::User < Avo::BaseResource
 
   def fields
     field :id, as: :id
+    field :line_user_id, as: :text
+    field :display_name, as: :text
+    field :picture_url, as: :text
+    field :email, as: :text
   end
 end
