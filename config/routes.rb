@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount_avo
   root "home#home"
   get  "login", to: "login#login"
   post '/auth/line_liff', to: 'auth#line_liff'
