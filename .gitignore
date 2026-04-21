@@ -36,3 +36,8 @@
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+
+# Local LINE LIFF development helpers and mkcert TLS files.
+/bin/dev-liff
+/localhost.pem
+/localhost-key.pem
