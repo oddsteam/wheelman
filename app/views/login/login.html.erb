@@ -1,4 +1,16 @@
 <script>
+  const isLocal = window.location.hostname === "localhost";
+
+  if (isLocal) {
+    window.liff = {
+      init: async () => {},
+      isLoggedIn: () => true,
+      login: () => {},
+      logout: () => {},
+      getIDToken: () => "mock.id.token",
+    };
+  }
+
   (async () => {
     await liff.init({ liffId: "<%= ENV['LINE_LIFF_ID'] %>"});
  

@@ -5,7 +5,11 @@ class AuthController < ApplicationController
     return render json: { error: "missing token" }, status: 401 if id_token.blank?
 
     begin
-      data = LineAuthService.verify(id_token)
+      if Rails.env.development?
+        data = Line::MockLineProfile.data
+      else
+        data = LineAuthService.verify(id_token)
+      end
     rescue => e
       return render json: { error: e.message }, status: 401
     end
