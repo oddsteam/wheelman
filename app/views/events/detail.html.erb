@@ -12,10 +12,12 @@
     <div class="bg-white rounded-2xl shadow p-[8px]">
 
       <!-- Photo -->
+      <div class="flex justify-center items-center">
       <%= image_tag(
-        @event.photo.attached? ? url_for(@event.photo) : "Default-Event.svg",
-        class: "w-full max-h-48 object-fill rounded-lg mb-2"
+        @event.photo.attached? ? url_for(@event.photo) : "Default-Event.png",
+        class: "max-w-full h-auto object-fill rounded-lg mb-2"
       ) %>
+      </div>
 
       <!-- Title -->
       <h1 class="text-[20px] font-normal text-[#2E2E2D] px-[4px] mb-2">
