@@ -46,30 +46,31 @@
 </div>
 
     <div>
-      <%= form.label :name, "Event Name" %><br>
-
+      <%= form.label :name, "Event Name" , class: "block mb-2 font-medium" %>
+      
       <%= form.text_field :name, 
         id: "event_name",
         required: true, 
         placeholder: "ลองแกล้งๆตั้งชื่อมาหน่อยจ้า", 
-        class: "w-full p-3 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#95C24A]" %>
+        class: "w-full p-3 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#95C24A] " %>
       <p id="name_error" class="text-red-500 text-sm mt-1"></p>
-      </div>
-      <div class="mb-4">
-        <label class="block mb-2 font-medium">Activity Type</label>
+    </div>
 
-        <div class="flex gap-3">
+   <div class="mb-4">
+     <label class="block mb-2 font-medium">Activity Type</label>
 
-         <label class="cursor-pointer">
-            <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "swimming", nil %>
-            <div class="px-4 py-2 bg-white rounded-xl 
-            flex items-center gap-2
-            peer-checked:border-[#4AA2C2] 
-            peer-checked:ring-1 peer-checked:ring-[#4AA2C2]">
-             <%= image_tag "Swim.png", width: 20, height: 20 %>
+       <div class="flex gap-3">
 
-            <span>Swimming</span>
-            </div>
+        <label class="cursor-pointer">
+          <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "swimming", nil %>
+          <div class="px-4 py-2 bg-white rounded-xl 
+          flex items-center gap-2
+          peer-checked:border-[#4AA2C2] 
+          peer-checked:ring-1 peer-checked:ring-[#4AA2C2]">
+           <%= image_tag "Swim.png", width: 20, height: 20 %>
+
+          <span>Swimming</span>
+          </div>
           </label>
           
           <label class="cursor-pointer">
@@ -96,14 +97,15 @@
           
         </div>
       </div>
-      <div class="mb-4">
-      <label class="block mb-2 font-medium">Category</label>
+
+   <div class="mb-4">
+    <label class="block mb-2 font-medium">Category</label>
 
       <div class="flex gap-3">
 
         <label class="cursor-pointer">
           <%= form.radio_button :category, "race", class: "hidden peer" %>
-          <span class="px-4 py-2 rounded-lg bg-white
+          <span class="px-4 py-2 bg-white rounded-xl flex items-center gap-2
                       peer-checked:border-[#95C24A] peer-checked:ring-1 peer-checked:ring-[#95C24A]">
             Race
           </span>
@@ -111,7 +113,7 @@
 
         <label class="cursor-pointer">
           <%= form.radio_button :category, "camp", class: "hidden peer" %>
-          <span class="px-4 py-2 rounded-lg bg-white
+          <span class="px-4 py-2 bg-white rounded-xl flex items-center gap-2
                       peer-checked:border-[#95C24A] peer-checked:ring-1 peer-checked:ring-[#95C24A]">
             Camp
           </span>
@@ -119,8 +121,9 @@
 
       </div>
     </div>
+
       <div>
-        <%= form.label :description, "Description" %><br>
+        <%= form.label :description, "Description" , class: "block mb-2 font-medium" %>
         <%= form.text_area :description,
         id: "description",
         required: true, 
@@ -128,8 +131,9 @@
         class: "w-full p-3 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#95C24A]" %>
         <p id="description_error" class="text-red-500 text-sm mt-1"></p>
       </div>
+
       <div>
-        <%= form.label :location, "Location" %><br>
+        <%= form.label :location, "Location" , class: "block mb-2 font-medium" %>
         <%= form.text_field :location_description, 
         id: "location",
         required: true,  
@@ -146,7 +150,7 @@
         </div>
 
       <div class="space-y-2">
-        <label class="block text-sm font-medium">Date Range</label>
+        <label class="block mb-2 font-medium">Date Range</label>
 
         <input
           type="text"
