@@ -9,6 +9,7 @@ document.addEventListener("turbo:load", () => {
   flatpickr("#date_range", {
     mode: "range",
     dateFormat: "Y-m-d",
+    minDate: "today",
 
     onChange: function(selectedDates) {
 
