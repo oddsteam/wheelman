@@ -57,47 +57,42 @@
       <p id="name_error" class="text-red-500 text-sm mt-1"></p>
     </div>
 
-   <div class="mb-4">
-     <label class="block mb-2 font-medium">Activity Type</label>
+    <div class="flex gap-2 flex-wrap">
 
-       <div class="flex gap-3">
-
-        <label class="cursor-pointer">
-          <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "swimming", nil %>
-          <div class="px-4 py-2 bg-white rounded-xl 
-          flex items-center gap-2
-          peer-checked:border-[#4AA2C2] 
-          peer-checked:ring-1 peer-checked:ring-[#4AA2C2]">
-           <%= image_tag "Swim.png", width: 20, height: 20 %>
-
-          <span>Swimming</span>
-          </div>
-          </label>
-          
-          <label class="cursor-pointer">
-            <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "running", nil %>
-            <div class="px-4 py-2 bg-white rounded-xl
-            flex items-center gap-2
-            peer-checked:border-[#95C24A]
-            peer-checked:ring-1 peer-checked:ring-[#95C24A]">
-            <%= image_tag "Run.png", width: 20, height: 20 %>
-            <span>Running</span>
-            </div>
-          </label>
-
-          <label class="cursor-pointer">
-            <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "cycling", nil %>
-            <div class="px-4 py-2 bg-white rounded-xl
-            flex items-center gap-2
-            peer-checked:border-[#E76903]
-            peer-checked:ring-1 peer-checked:ring-[#E76903]">
-             <%= image_tag "Bike.png", width: 20, height: 20 %>
-             <span>Cycling</span>
-            </div>
-          </label>
-          
+      <label class="cursor-pointer">
+        <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "swimming", nil %>
+        <div class="px-3 py-2 bg-white rounded-xl 
+        flex items-center gap-2 whitespace-nowrap
+        peer-checked:border-[#4AA2C2] 
+        peer-checked:ring-1 peer-checked:ring-[#4AA2C2]">
+          <%= image_tag "Swim.png", width: 20, height: 20 %>
+          <span class="text-sm">Swimming</span>
         </div>
-      </div>
+      </label>
+  
+      <label class="cursor-pointer">
+        <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "running", nil %>
+        <div class="px-3 py-2 bg-white rounded-xl
+        flex items-center gap-2 whitespace-nowrap
+        peer-checked:border-[#95C24A]
+        peer-checked:ring-1 peer-checked:ring-[#95C24A]">
+          <%= image_tag "Run.png", width: 20, height: 20 %>
+          <span class="text-sm">Running</span>
+        </div>
+      </label>
+
+      <label class="cursor-pointer">
+        <%= form.check_box :activity_type, { multiple: true, class: "hidden peer" }, "cycling", nil %>
+        <div class="px-3 py-2 bg-white rounded-xl
+        flex items-center gap-2 whitespace-nowrap
+        peer-checked:border-[#E76903]
+        peer-checked:ring-1 peer-checked:ring-[#E76903]">
+          <%= image_tag "Bike.png", width: 20, height: 20 %>
+          <span class="text-sm">Cycling</span>
+        </div>
+      </label>
+  
+    </div>
 
    <div class="mb-4">
     <label class="block mb-2 font-medium">Category</label>
