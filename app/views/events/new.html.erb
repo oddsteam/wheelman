@@ -253,8 +253,12 @@ document.addEventListener("turbo:load", function () {
       locationLinkError.textContent = "";
     } else {
       try {
-        new URL(value);
-        locationLinkError.textContent = "";
+        const url = new URL(value);
+        if (url.protocol === "http:" || url.protocol === "https:") {
+          locationLinkError.textContent = "";
+        } else {
+          locationLinkError.textContent = "ต้องเป็น URL นะ";
+        }
       } catch {
         locationLinkError.textContent = "ต้องเป็น URL นะ";
       }
@@ -265,6 +269,19 @@ document.addEventListener("turbo:load", function () {
   // activity check
   function isActivityTypeValid() {
     return document.querySelectorAll("input[name='event[activity_type][]']:checked").length > 0;
+  }
+
+  // location link check
+  function isLocationLinkValid() {
+  const value = locationLinkInput.value;
+  if (!value) return true; // optional ไม่กรอกก็ได้
+
+    try {
+      const url = new URL(value);
+      return url.protocol === "http:" || url.protocol === "https:";
+    } catch {
+      return false;
+    }
   }
 
   // date check
@@ -280,7 +297,8 @@ document.addEventListener("turbo:load", function () {
     const isValid =
       form.checkValidity() &&
       isActivityTypeValid() &&
-      isDateValid();
+      isDateValid() &&
+      isLocationLinkValid();
 
     submitBtn.disabled = !isValid;
 
