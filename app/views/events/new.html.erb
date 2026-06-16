@@ -15,16 +15,16 @@
      <div class="mb-4">
       <%= form.label :photo, "Photo (Optional)", class: "block mb-2 font-medium" %>
 
-    <div class="relative w-20 h-16">
-    <label class="flex items-center justify-center w-20 h-16 rounded-2xl bg-white hover:border-[#95C24A] transition cursor-pointer overflow-hidden">
-    
+    <div class="relative inline-block">
+    <label class="flex items-center justify-center w-16 h-16 rounded-2xl bg-white cursor-pointer overflow-hidden">
+
     <!-- icon (ตอนยังไม่เลือกรูป) -->
     <div id="photo-placeholder" class="text-[#95C24A] text-2xl">
       <%= image_tag "Add photo.png", width: 20, height: 20 %>
     </div>
 
     <!-- preview -->
-    <img id="photo-preview" class="hidden w-full h-full object-cover" />
+    <img id="photo-preview" class="hidden w-full h-full object-cover rounded-2xl" />
 
     <!-- input จริง (ซ่อน) -->
     <%= form.file_field :photo,
@@ -32,13 +32,31 @@
       accept: "image/jpeg,image/png,image/heic",
       class: "hidden" %>
   </label>
-  
-   <button type="button" 
-            id="remove-photo" 
-            class="hidden absolute -top-2 -right-4 bg-red-500 text-red-500 rounded-full w-6 h-6 flex items-center justify-center text-[10px] font-bold shadow-lg hover:bg-red-600 transition z-50"
-            style="display: none;"> <%= image_tag "X delete.png", width: 20, height: 20 %>
-    
+
+   <button type="button"
+            id="remove-photo"
+            class="hidden absolute z-50"
+            style="display: none; bottom: 2px; right: 2px;">
+      <%= image_tag "X delete.png", width: 20, height: 20 %>
     </button>
+  </div>
+
+  <!-- Delete confirmation modal -->
+  <div id="delete-photo-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center">
+    <div class="absolute inset-0 bg-black/30"></div>
+    <div class="relative bg-white rounded-2xl shadow-xl px-8 py-6 w-72 text-center">
+      <p class="text-lg font-semibold mb-5">Are you sure?</p>
+      <div class="flex gap-3 justify-center">
+        <button type="button" id="cancel-delete-photo"
+          class="flex-1 py-2 rounded-xl border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition">
+          Cancel
+        </button>
+        <button type="button" id="confirm-delete-photo"
+          class="flex-1 py-2 rounded-xl bg-orange-500 text-white font-medium hover:bg-orange-600 transition">
+          Delete
+        </button>
+      </div>
+    </div>
   </div>
 
    <% @event.errors.full_messages_for(:photo).each do |message| %>
@@ -217,24 +235,40 @@ document.addEventListener("turbo:load", function () {
       reader.readAsDataURL(file);
     });
 
-    // 2. ปุ่มลบพร้อม Confirm
-    if (removeBtn) {
-    removeBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    // 2. ปุ่มลบพร้อม Confirm modal
+    const modal = document.getElementById("delete-photo-modal");
+    const cancelBtn = document.getElementById("cancel-delete-photo");
+    const confirmBtn = document.getElementById("confirm-delete-photo");
 
-    if (confirm("คุณแน่ใจใช่ไหมที่จะลบรูปภาพนี้?")) {
-      input.value = ""; 
+    function clearPhoto() {
+      input.value = "";
       preview.src = "";
       preview.classList.add("hidden");
       placeholder.classList.remove("hidden");
-      
-      // แทนที่จะใช้ add("hidden") อย่างเดียว
       removeBtn.style.setProperty('display', 'none', 'important');
       removeBtn.classList.add("hidden");
-      }
-    });
-  }
+    }
+
+    if (removeBtn) {
+      removeBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        modal.classList.remove("hidden");
+      });
+
+      cancelBtn.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+
+      confirmBtn.addEventListener("click", () => {
+        modal.classList.add("hidden");
+        clearPhoto();
+      });
+
+      modal.querySelector(".absolute.inset-0").addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+    }
   }
 
   // location link (URL check)
