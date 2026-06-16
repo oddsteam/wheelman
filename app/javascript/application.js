@@ -15,11 +15,15 @@ document.addEventListener("turbo:load", () => {
 
       if (selectedDates.length === 2) {
 
-        const start = selectedDates[0].toISOString().split("T")[0]
-        const end = selectedDates[1].toISOString().split("T")[0]
+        const fmt = (d) => {
+          const y = d.getFullYear()
+          const m = String(d.getMonth() + 1).padStart(2, "0")
+          const day = String(d.getDate()).padStart(2, "0")
+          return `${y}-${m}-${day}`
+        }
 
-        document.getElementById("start_date").value = start
-        document.getElementById("end_date").value = end
+        document.getElementById("start_date").value = fmt(selectedDates[0])
+        document.getElementById("end_date").value = fmt(selectedDates[1])
 
       }
 
