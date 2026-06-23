@@ -4,6 +4,11 @@ class EventsController < ApplicationController
 
     @events = Event.order(start_date: :asc)
     @events_by_category = @events.group_by(&:category)
+
+    @year = (params[:year].presence || Date.current.year).to_i
+    year_events = Event.where(start_date: Date.new(@year, 1, 1)..Date.new(@year, 12, 31))
+                       .order(:start_date)
+    @events_by_month = year_events.group_by { |event| event.start_date.month }
   end
 
   def me
