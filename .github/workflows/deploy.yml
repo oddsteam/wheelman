@@ -52,4 +52,13 @@ jobs:
           KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           LINE_CHANNEL_SECRET: ${{ secrets.LINE_CHANNEL_SECRET }}
-        run: bin/kamal setup -d dev
+        run: |
+          # Defensive cleanup: strip stray characters a copy-paste may have
+          # added to the secrets (the master key must be exactly 32 hex chars).
+          export RAILS_MASTER_KEY="$(printf '%s' "$RAILS_MASTER_KEY" | tr -cd '0-9a-f')"
+          export LINE_CHANNEL_SECRET="$(printf '%s' "$LINE_CHANNEL_SECRET" | tr -d '[:space:]')"
+          if [ "${#RAILS_MASTER_KEY}" -ne 32 ]; then
+            echo "::error::RAILS_MASTER_KEY is ${#RAILS_MASTER_KEY} hex chars after cleanup (expected 32)"
+            exit 1
+          fi
+          bin/kamal setup -d dev
