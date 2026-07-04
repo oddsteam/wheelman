@@ -18,9 +18,15 @@ Avo.configure do |config|
   end
 
   ## == Authentication ==
-  # config.current_user_method = :current_user
-  # config.authenticate_with do
-  # end
+  # Admins can reach /avo either logged in via LINE (with admin flag)
+  # or via email/password at /admin/login.
+  config.current_user_method do
+    User.find_by(id: session[:user_id])
+  end
+  config.authenticate_with do
+    user = User.find_by(id: session[:user_id])
+    redirect_to "/admin/login" unless user&.admin?
+  end
 
   ## == Authorization ==
   # config.is_admin_method = :is_admin

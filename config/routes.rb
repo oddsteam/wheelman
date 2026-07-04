@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   root "home#home"
   get  "login", to: "login#login"
   post "/auth/line_liff", to: "auth#line_liff"
+  delete "logout", to: "sessions#destroy"
+  get  "admin/login", to: "admin/sessions#new", as: :admin_login
+  post "admin/login", to: "admin/sessions#create"
   get "events", to: "events#index"
   get "events/new"
   get "events/me"

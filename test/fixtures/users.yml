@@ -1,11 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  line_user_id: MyString
-  display_name: MyString
-  picture_url: MyString
+  line_user_id: U_fixture_one
+  display_name: Line User One
+  picture_url: https://example.com/one.png
 
 two:
-  line_user_id: MyString
-  display_name: MyString
-  picture_url: MyString
+  line_user_id: U_fixture_two
+  display_name: Line User Two
+  picture_url: https://example.com/two.png
+
+admin:
+  email: admin@example.com
+  display_name: Admin
+  password_digest: <%= BCrypt::Password.create("password123") %>
+  admin: true

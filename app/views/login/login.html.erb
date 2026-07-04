@@ -1,29 +1,19 @@
+<%= render "shared/liff_mock" %>
+
 <script>
-  const isLocal = window.location.hostname === "localhost";
-
-  if (isLocal) {
-    window.liff = {
-      init: async () => {},
-      isLoggedIn: () => true,
-      login: () => {},
-      logout: () => {},
-      getIDToken: () => "mock.id.token",
-    };
-  }
-
   (async () => {
     await liff.init({ liffId: "<%= ENV['LINE_LIFF_ID'] %>"});
- 
+
     if (!liff.isLoggedIn()) {
       liff.login();
       return;
     }
- 
+
     const idToken = liff.getIDToken();
     if (!idToken) {
       return;
     }
- 
+
     const res = await fetch("/auth/line_liff", {
       method: "POST",
       headers: {
@@ -33,11 +23,11 @@
       credentials: "same-origin",
       body: JSON.stringify({ id_token: idToken })
     });
- 
+
     if (!res.ok) {
       return;
     }
- 
+
     window.location.href = "/events";
   })();
 </script>

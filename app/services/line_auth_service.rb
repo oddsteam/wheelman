@@ -13,6 +13,12 @@ class LineAuthService
       client_id: ENV["LINE_CHANNEL_ID"]
     })
 
+    unless res.is_a?(Net::HTTPSuccess)
+      # LINE returns JSON error details on 4xx; other failures may not be JSON
+      detail = JSON.parse(res.body)["error_description"] rescue nil
+      raise StandardError.new("LINE verify failed: #{detail || "HTTP #{res.code}"}")
+    end
+
     body = JSON.parse(res.body)
 
     if body["error"]

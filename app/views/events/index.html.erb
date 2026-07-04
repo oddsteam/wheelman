@@ -5,9 +5,11 @@
   <%# Top bar %>
   <div class="flex justify-between items-center gap-2 px-4 fixed h-12 top-0 right-0 left-0 bg-white z-10 border-b border-[#E0E1E0]">
     <div class="flex items-center gap-3">
-      <% if @user %>
-        <img class="h-6 w-6 rounded-full" src="<%= @user.picture_url %>" />
-        <p class="text-[#2E2E2D]"><%= @user.display_name %></p>
+      <% if current_user %>
+        <% if current_user.picture_url.present? %>
+          <img class="h-6 w-6 rounded-full" src="<%= current_user.picture_url %>" />
+        <% end %>
+        <p class="text-[#2E2E2D]"><%= current_user.display_name || current_user.email %></p>
       <% end %>
     </div>
 
@@ -37,6 +39,17 @@
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
              stroke-width="1.8" stroke="currentColor" class="h-5 w-5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
+      <% end %>
+
+      <%# Logout %>
+      <%= button_to logout_path, method: :delete, aria: { label: "Logout" },
+            class: "flex h-9 w-9 cursor-pointer items-center justify-center rounded-xl border border-[#E0E1E0] text-[#989A96] hover:bg-gray-50",
+            form: { data: { turbo_confirm: "Logout?" }, onsubmit: "if (window.location.hostname !== 'localhost' && window.liff?.isLoggedIn?.()) liff.logout();" } do %>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+             stroke-width="1.8" stroke="currentColor" class="h-5 w-5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
         </svg>
       <% end %>
     </div>

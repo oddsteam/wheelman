@@ -1,0 +1,14 @@
+<%# On localhost the real LIFF SDK cannot initialize (no LIFF endpoint), so
+    replace it with a mock; the server side uses Line::MockLineProfile in dev. %>
+<script>
+  if (window.location.hostname === "localhost") {
+    window.liff = {
+      init: async () => {},
+      isLoggedIn: () => true,
+      isInClient: () => false,
+      login: () => {},
+      logout: () => {},
+      getIDToken: () => "mock.id.token",
+    };
+  }
+</script>

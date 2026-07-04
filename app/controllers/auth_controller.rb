@@ -1,4 +1,6 @@
 class AuthController < ApplicationController
+  skip_before_action :require_login
+
   def line_liff
     id_token = params[:id_token]
 
@@ -20,7 +22,7 @@ class AuthController < ApplicationController
     user.email = data["email"] if data["email"].present?
     user.save!
 
-    session[:user_id] = user.line_user_id
+    session[:user_id] = user.id
 
     render json: { message: "success", user: data }
   end

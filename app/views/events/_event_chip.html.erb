@@ -1,27 +1,29 @@
 <%= link_to event_path(event),
       data: { category: event.category, events_view_target: "chip", turbo_frame: "_top" },
-      class: "flex items-center gap-2 rounded-lg pr-2 mb-1 overflow-hidden",
+      class: "flex items-center gap-1 rounded-lg pr-1 mb-1 overflow-hidden",
       style: "background-color: #{category_tint(event.category)}" do %>
   <%# Category badge %>
-  <span class="flex h-6 w-6 flex-none items-center justify-center rounded-md text-[12px] font-semibold text-white"
+  <span class="flex h-5 w-5 flex-none items-center justify-center rounded-md text-[11px] font-semibold text-white"
         style="background-color: <%= category_color(event.category) %>">
     <%= category_letter(event.category) %>
   </span>
 
   <%# Start day %>
-  <span class="flex-none text-[11px] text-[#989A96]">
+  <span class="flex-none text-[10px] text-[#989A96]">
     <%= event.start_date&.strftime("%d") %>
   </span>
 
   <%# Event name %>
-  <span class="min-w-0 flex-1 truncate text-[12px] text-[#2E2E2D]">
+  <span class="min-w-0 flex-1 truncate text-[11px] text-[#2E2E2D]">
     <%= event.name %>
   </span>
 
   <%# Activity icons %>
-  <% Array(event.activity_type).each do |type| %>
-    <% if (icon = activity_icon(type)) %>
-      <%= image_tag icon, width: 14, height: 14, class: "flex-none" %>
+  <div class="flex flex-none items-center gap-0.5 max-[420px]:hidden">
+    <% Array(event.activity_type).each do |type| %>
+      <% if (icon = activity_icon(type)) %>
+        <%= image_tag icon, width: 12, height: 12, class: "flex-none" %>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 <% end %>

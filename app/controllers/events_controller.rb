@@ -1,7 +1,5 @@
 class EventsController < ApplicationController
   def index
-    @user = User.find_by(line_user_id: session[:user_id])
-
     @events = Event.order(start_date: :asc)
     @events_by_category = @events.group_by(&:category)
 
@@ -36,7 +34,6 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    puts params
     params.expect(event: [ :photo, :name, { activity_type: [] }, :category, :description, :location_description, :location_link, :start_date, :end_date ])
   end
 end
