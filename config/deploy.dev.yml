@@ -1,5 +1,9 @@
-# Dev environment — deploy with: bin/kamal deploy -d dev
-# Shared config (image, registry, ssh, volumes, env) comes from config/deploy.yml.
+# Dev environment — deployed by GitHub Actions on push to `deploy-dev`
+# (.github/workflows/deploy.yml). Shared config (image, registry, ssh user,
+# volumes, env) comes from config/deploy.yml.
+#
+# The image is built natively on the amd64 GitHub runner and pushed to GHCR
+# with the repo's GITHUB_TOKEN — no cross-build/QEMU and no personal PAT.
 
 servers:
   web:
@@ -11,18 +15,3 @@ servers:
 #   cloudflared tunnel --url http://localhost:80
 proxy:
   ssl: false
-
-# Manual dev deploys authenticate with the dedicated deploy key (net-ssh
-# doesn't pick up custom key names automatically). Agent keys still work as
-# a fallback. Production uses the ssh-agent provided by GitHub Actions.
-ssh:
-  keys:
-    - "~/.ssh/wheelman_deploy"
-
-# Build natively on the amd64 VM instead of cross-building on the arm64 Mac:
-# QEMU emulation crashes when compiling native gem extensions (io-console,
-# signal 5). The VM has 2 GB swap added so the 1 GB e2-micro won't OOM.
-builder:
-  arch: amd64
-  remote: ssh://deploy@35.253.219.26
-  local: false

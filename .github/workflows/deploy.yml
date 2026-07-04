@@ -1,19 +1,20 @@
-# Deploys to the production GCP VM with Kamal (-d production).
-# Currently MANUAL-ONLY: production isn't provisioned yet, so the auto
-# trigger is disabled. TODO: when the prod VM + domain are configured in
-# config/deploy.production.yml, re-enable the workflow_run trigger below
-# so every green CI run on main auto-deploys.
-name: Deploy
+# Builds the image on the runner (native amd64), pushes to GHCR with the
+# repo's GITHUB_TOKEN, and deploys to the dev VM with Kamal.
+#
+# Uses `kamal setup` (idempotent) so a fresh VM gets kamal-proxy booted on the
+# first run; subsequent pushes just redeploy.
+#
+# TODO (production): add a `main` trigger + a `-d production` job once the prod
+# VM + domain are configured in config/deploy.production.yml.
+name: Deploy dev
 
 on:
-  # workflow_run:
-  #   workflows: [CI]
-  #   types: [completed]
-  #   branches: [main]
+  push:
+    branches: [deploy-dev]
   workflow_dispatch:
 
 concurrency:
-  group: production-deploy
+  group: deploy-dev
   cancel-in-progress: false
 
 permissions:
@@ -23,10 +24,6 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    # TODO when re-enabling workflow_run, also restore:
-    #   if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
-    #   and checkout with ref: ${{ github.event.workflow_run.head_sha }}
-    environment: production
 
     steps:
       - name: Checkout code
@@ -50,9 +47,9 @@ jobs:
           mkdir -p ~/.ssh
           echo "StrictHostKeyChecking accept-new" >> ~/.ssh/config
 
-      - name: Deploy with Kamal
+      - name: Deploy to dev with Kamal
         env:
           KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           LINE_CHANNEL_SECRET: ${{ secrets.LINE_CHANNEL_SECRET }}
-        run: bin/kamal deploy -d production
+        run: bin/kamal setup -d dev
