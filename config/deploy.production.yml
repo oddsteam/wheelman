@@ -1,0 +1,15 @@
+# Production environment — deploy with: bin/kamal deploy -d production
+# Shared config (image, registry, ssh, volumes, env) comes from config/deploy.yml.
+# TODO: fill in the placeholders when the prod VM + domain exist (see docs/deployment.md).
+
+servers:
+  web:
+    # External IP of the production GCP VM
+    - <PROD_VM_IP>
+
+# kamal-proxy terminates TLS with a Let's Encrypt cert for this host.
+# Behind Cloudflare use SSL mode "Full" first, then "Full (strict)".
+proxy:
+  ssl: true
+  # The production domain (registered on Cloudflare)
+  host: <YOUR_DOMAIN>

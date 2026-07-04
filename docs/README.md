@@ -5,5 +5,6 @@
 **Table of Contents**
 
 * [Development guide](./development.md) สำหรับ Local development setup
+* [Deployment guide](./deployment.md) สำหรับ deploy ขึ้น production (Cloudflare + GCP + GitHub Actions)
 * [Architectural decision records (ADRs)](./c4/adrs/)
 เป็นโฟลเดอร์ที่เก็บการตัดสินใจต่าง ๆ ในเรื่อง Architecture ของ Wheelman app
