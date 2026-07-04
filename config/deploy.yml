@@ -1,6 +1,10 @@
 # Name of your application. Used to uniquely configure containers.
 service: wheelman
 
+# The e2-micro is CPU-throttled, so first boot (db:prepare + Puma) is slow.
+# Give the health check more than the 30s default before declaring failure.
+deploy_timeout: 90
+
 # Name of the container image (use your-user/app-name on external registries).
 image: oddsteam/wheelman
 
