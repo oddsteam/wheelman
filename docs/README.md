@@ -5,5 +5,6 @@
 **Table of Contents**
 
 * [Development guide](./development.md) สำหรับ Local development setup
+* [Events & Roles](./events.md) ฟีเจอร์ event (สร้าง / เข้าร่วม / ดูรายการ) และระบบ role/permission
 * [Architectural decision records (ADRs)](./c4/adrs/)
 เป็นโฟลเดอร์ที่เก็บการตัดสินใจต่าง ๆ ในเรื่อง Architecture ของ Wheelman app

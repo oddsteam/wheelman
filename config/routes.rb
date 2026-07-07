@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   get "events/me"
   get "events/:id", to: "events#detail", as: :event
   post "events", to: "events#create"
+  post   "events/:id/join", to: "events#join", as: :join_event
+  delete "events/:id/join", to: "events#leave", as: :leave_event
+  delete "events/:id", to: "events#destroy"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

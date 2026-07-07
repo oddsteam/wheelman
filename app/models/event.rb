@@ -1,6 +1,17 @@
 class Event < ApplicationRecord
     has_one_attached :photo
 
+    # creator/organizer (optional: legacy events have no creator)
+    belongs_to :user, optional: true
+
+    has_many :event_participations, dependent: :destroy
+    has_many :participants, through: :event_participations, source: :user
+
+    def joined_by?(user)
+        return false if user.nil?
+        event_participations.exists?(user_id: user.id)
+    end
+
     # event_name (1-200)
     validates :name, presence: true, length: { maximum: 200 }
 

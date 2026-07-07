@@ -32,13 +32,12 @@
             <%= link_to "Detail", event_path(event),
             class: "flex-1 flex items-center text-center text-gray-800 justify-center bg-[#95C24A] py-2 rounded-xl text-[14px] font-bold w-full h-[40px]" %>
 
-          <!-- Delete Icon -->
-          <%= link_to event_path(event),
-                method: :delete,
-                data: { confirm: "Are you sure?" },
-                class: "w-12 h-12 items-center justify-center flex rounded-xl" do %>
-                <%= image_tag "Buttons-Delete.png", width: 50, height: 50 %>
-            <% end %>
+          <!-- Leave this event -->
+          <%= button_to leave_event_path(event), method: :delete,
+                form: { data: { turbo_confirm: "Leave this event?" } },
+                class: "px-4 h-[40px] flex items-center justify-center rounded-xl border border-[#95C24A] text-[#95C24A] text-[14px] font-medium cursor-pointer hover:bg-green-50" do %>
+            Leave
+          <% end %>
 
           </div>
 

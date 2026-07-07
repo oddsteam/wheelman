@@ -75,11 +75,39 @@
         <%= format_date_range(@event.start_date, @event.end_date) %>
       </p>
 
-      <div>
-        <button class="w-full py-3 rounded-xl bg-[#95C24A] hover:bg-[#7ea63d] text-white font-medium">
-          Confirm & Join!
-        </button>
-      </div>
+      <!-- Participants -->
+      <p class="text-[#989A96] text-[14px] font-light px-[4px]">Participants</p>
+      <p class="text-[#2E2E2D] text-[14px] font-normal mb-4 px-[4px]">
+        <%= @event.participants.size %> joined
+      </p>
+
+      <!-- Join / Leave -->
+      <% if current_user&.can_join_events? %>
+        <div>
+          <% if current_user.joined?(@event) %>
+            <%= button_to leave_event_path(@event), method: :delete,
+                  class: "w-full py-3 rounded-xl border border-[#95C24A] text-[#95C24A] font-medium cursor-pointer hover:bg-green-50" do %>
+              ✓ Joined · Leave
+            <% end %>
+          <% else %>
+            <%= button_to join_event_path(@event),
+                  class: "w-full py-3 rounded-xl bg-[#95C24A] hover:bg-[#7ea63d] text-white font-medium cursor-pointer" do %>
+              Confirm &amp; Join!
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <!-- Delete (creator or admin) -->
+      <% if current_user&.admin? || @event.user_id == current_user&.id %>
+        <div class="mt-3">
+          <%= button_to event_path(@event), method: :delete,
+                form: { data: { turbo_confirm: "Delete this event?" } },
+                class: "w-full py-2 rounded-xl border border-red-300 text-red-500 text-sm font-medium cursor-pointer hover:bg-red-50" do %>
+            Delete event
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
