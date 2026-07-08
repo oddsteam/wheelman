@@ -1,7 +1,8 @@
-<%= link_to event_path(event),
-      data: { category: event.category, events_view_target: "chip", turbo_frame: "_top" },
-      class: "flex items-center gap-1 rounded-lg pr-1 mb-1 overflow-hidden",
-      style: "background-color: #{category_tint(event.category)}" do %>
+<%# Guests can see the chip but not open the detail, so it renders as a
+    non-clickable div for them (still filterable via the data attributes). %>
+<% chip_class = "flex items-center gap-1 rounded-lg pr-1 mb-1 overflow-hidden" %>
+<% chip_style = "background-color: #{category_tint(event.category)}" %>
+<% chip_body = capture do %>
   <%# Category badge %>
   <span class="flex h-5 w-5 flex-none items-center justify-center rounded-md text-[11px] font-semibold text-white"
         style="background-color: <%= category_color(event.category) %>">
@@ -9,14 +10,10 @@
   </span>
 
   <%# Start day %>
-  <span class="flex-none text-[10px] text-[#989A96]">
-    <%= event.start_date&.strftime("%d") %>
-  </span>
+  <span class="flex-none text-[10px] text-[#989A96]"><%= event.start_date&.strftime("%d") %></span>
 
   <%# Event name %>
-  <span class="min-w-0 flex-1 truncate text-[11px] text-[#2E2E2D]">
-    <%= event.name %>
-  </span>
+  <span class="min-w-0 flex-1 truncate text-[11px] text-[#2E2E2D]"><%= event.name %></span>
 
   <%# Activity icons %>
   <div class="flex flex-none items-center gap-0.5 max-[420px]:hidden">
@@ -26,4 +23,14 @@
       <% end %>
     <% end %>
   </div>
+<% end %>
+
+<% if current_user&.can_view_event_details? %>
+  <%= link_to chip_body, event_path(event),
+        data: { category: event.category, events_view_target: "chip", turbo_frame: "_top" },
+        class: chip_class, style: chip_style %>
+<% else %>
+  <%= content_tag :div, chip_body,
+        data: { category: event.category, events_view_target: "chip" },
+        class: chip_class, style: chip_style %>
 <% end %>

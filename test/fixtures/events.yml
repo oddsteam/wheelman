@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  activity_type:
-  category:
+  name: Race One
+  activity_type: ["cycling"]
+  category: race
   description: MyString
   location_description: MyString
   location_link: MyString
@@ -11,11 +11,12 @@ one:
   end_date: 2026-03-15
 
 two:
-  name: MyString
-  activity_type:
-  category:
+  name: Camp Two
+  activity_type: ["running"]
+  category: camp
   description: MyString
   location_description: MyString
   location_link: MyString
   start_date: 2026-03-15
   end_date: 2026-03-15
+  user: two

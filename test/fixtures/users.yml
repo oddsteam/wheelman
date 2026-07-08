@@ -4,14 +4,22 @@ one:
   line_user_id: U_fixture_one
   display_name: Line User One
   picture_url: https://example.com/one.png
+  role: athlete
 
 two:
   line_user_id: U_fixture_two
   display_name: Line User Two
   picture_url: https://example.com/two.png
+  role: coach
+
+guest:
+  line_user_id: U_fixture_guest
+  display_name: Guest User
+  role: guest
 
 admin:
   email: admin@example.com
   display_name: Admin
   password_digest: <%= BCrypt::Password.create("password123") %>
   admin: true
+  role: guest

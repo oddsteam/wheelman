@@ -36,3 +36,8 @@ User.create!(email: "admin@example.com", password: "changeme123", admin: true)
 # หรือ promote user ที่ login ผ่าน LINE อยู่แล้ว
 User.find_by(display_name: "Mock User").update!(admin: true)
 ```
+
+### Roles
+
+หลัง login ผู้ใช้จะได้ role เริ่มต้นเป็น `guest` (เห็นแค่รายการ event) admin กำหนด role ให้ใน Avo
+รายละเอียด role/permission และฟีเจอร์ event ดูที่ [Events & Roles](./events.md)

@@ -11,6 +11,7 @@ class Avo::Resources::User < Avo::BaseResource
     field :display_name, as: :text
     field :picture_url, as: :text
     field :email, as: :text
+    field :role, as: :select, options: { "Guest" => "guest", "Athlete" => "athlete", "Supporter" => "supporter", "Coach" => "coach" }
     field :admin, as: :boolean
     field :password, as: :password, only_on: :forms
   end

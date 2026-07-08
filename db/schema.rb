@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_04_000001) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_07_000003) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -39,6 +39,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_04_000001) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "event_participations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "event_id", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["event_id"], name: "index_event_participations_on_event_id"
+    t.index ["user_id", "event_id"], name: "index_event_participations_on_user_id_and_event_id", unique: true
+    t.index ["user_id"], name: "index_event_participations_on_user_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.json "activity_type"
     t.string "category"
@@ -50,6 +60,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_04_000001) do
     t.string "name"
     t.date "start_date"
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,11 +72,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_04_000001) do
     t.string "line_user_id"
     t.string "password_digest"
     t.string "picture_url"
+    t.string "role", default: "guest", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["line_user_id"], name: "index_users_on_line_user_id", unique: true
+    t.index ["role"], name: "index_users_on_role"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "event_participations", "events"
+  add_foreign_key "event_participations", "users"
+  add_foreign_key "events", "users"
 end
